@@ -1,4 +1,4 @@
-var gulp = require('gulp');
+/*var gulp = require('gulp');
 var karma = require('karma');
 var karmaUtils = require('./modules/karma-utils');
 
@@ -14,4 +14,4 @@ var karmaUtils = require('./modules/karma-utils');
         });
     });
 })();
-
+*/
