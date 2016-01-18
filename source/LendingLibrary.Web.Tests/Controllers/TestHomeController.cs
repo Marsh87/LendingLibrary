@@ -23,7 +23,7 @@ namespace LendingLibrary.Web.Tests
                   
         }
 
-        private static HomeController Create()
+        private HomeController Create()
         {
             return new HomeController();
         }
