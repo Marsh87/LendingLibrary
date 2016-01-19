@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LendingLibrary.Web.Controllers;
+﻿using LendingLibrary.Web.Controllers;
 using NUnit.Framework;
 
-namespace LendingLibrary.Web.Tests
+namespace LendingLibrary.Web.Tests.Controllers
 {
     [TestFixture]
     public class TestHomeController
@@ -19,8 +14,7 @@ namespace LendingLibrary.Web.Tests
 
             //---------------Execute Test ----------------------
             Assert.DoesNotThrow(()=>Create());
-            //---------------Test Result -----------------------
-                  
+            //---------------Test Result -----------------------             
         }
 
         private HomeController Create()
