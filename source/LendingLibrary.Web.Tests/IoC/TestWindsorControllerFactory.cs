@@ -73,7 +73,7 @@ namespace LendingLibrary.Web.Tests.IoC
             //---------------Assert Precondition----------------
 
             //---------------Execute Test ----------------------
-            var result = windsorControllerFactory.BaseGetControllerInstance(requestContext,controllerType);
+            var result = windsorControllerFactory.BaseGetControllerInstance(requestContext, controllerType);
             //---------------Test Result -----------------------
             Assert.AreEqual(expected, result);
         }
@@ -89,7 +89,9 @@ namespace LendingLibrary.Web.Tests.IoC
             //---------------Assert Precondition----------------
 
             //---------------Execute Test ----------------------
-            var ex = Assert.Throws<HttpException>(() => windsorControllerFactory.BaseGetControllerInstance(requestContext, null));
+            var ex =
+                Assert.Throws<HttpException>(
+                    () => windsorControllerFactory.BaseGetControllerInstance(requestContext, null));
             //---------------Test Result -----------------------
             Assert.AreEqual(404, ex.GetHttpCode());
         }
@@ -103,13 +105,14 @@ namespace LendingLibrary.Web.Tests.IoC
         }
 
         // ReSharper disable once InconsistentNaming
-        private class WindsorControllerFactory_EXPOSES_GetControllerInstance 
+        private class WindsorControllerFactory_EXPOSES_GetControllerInstance
             : WindsorControllerFactory
         {
-            public WindsorControllerFactory_EXPOSES_GetControllerInstance(IKernel kernel) 
+            public WindsorControllerFactory_EXPOSES_GetControllerInstance(IKernel kernel)
                 : base(kernel)
             {
             }
+
             public IController BaseGetControllerInstance(RequestContext requestContext, Type controllerType)
             {
                 return base.GetControllerInstance(requestContext, controllerType);

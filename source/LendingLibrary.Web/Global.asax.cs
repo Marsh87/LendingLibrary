@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using LendingLibrary.Web.IoC;
+using LendingLibrary.Web.Utils;
 
 namespace LendingLibrary.Web
 {
@@ -18,10 +19,7 @@ namespace LendingLibrary.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            var bootstrapper = new WindsorBootstrapper();
-            var container=bootstrapper.Bootstrap();
-            var controllerFactory=new WindsorControllerFactory(container.Kernel);
-            ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+            DependencyInjectionUtility.Bootstrap();
         }
     }
 }
