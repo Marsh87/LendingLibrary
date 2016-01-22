@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.Web", "Lendi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.Web.Tests", "LendingLibrary.Web.Tests\LendingLibrary.Web.Tests.csproj", "{496BBBE1-C521-4A47-AD56-03EF6B51BADE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.Domain", "LendingLibrary.Domain\LendingLibrary.Domain.csproj", "{5C167908-1493-42CD-8AD8-A05075532E11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.Domain.Tests", "LendingLibrary.Domain.Tests\LendingLibrary.Domain.Tests.csproj", "{3CCC0DA8-1718-481C-957E-852FF0AC47A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{496BBBE1-C521-4A47-AD56-03EF6B51BADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{496BBBE1-C521-4A47-AD56-03EF6B51BADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{496BBBE1-C521-4A47-AD56-03EF6B51BADE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C167908-1493-42CD-8AD8-A05075532E11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C167908-1493-42CD-8AD8-A05075532E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C167908-1493-42CD-8AD8-A05075532E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C167908-1493-42CD-8AD8-A05075532E11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CCC0DA8-1718-481C-957E-852FF0AC47A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CCC0DA8-1718-481C-957E-852FF0AC47A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CCC0DA8-1718-481C-957E-852FF0AC47A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CCC0DA8-1718-481C-957E-852FF0AC47A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
