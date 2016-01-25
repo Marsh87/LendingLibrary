@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LendingLibrary.Domain.Models;
 using NUnit.Framework;
 using PeanutButter.TestUtils.Generic;
 
@@ -23,10 +20,11 @@ namespace LendingLibrary.Domain.Tests.Models
         }
 
         [TestCase("PersonId",typeof(int))]
-        [TestCase("FirstName",typeof(string))]
+        [TestCase("FirstName", typeof(string))]
+        [TestCase("Surname",typeof(string))]
         [TestCase("PhoneNumber",typeof(string))]
         [TestCase("Email",typeof(string))]
-        [TestCase("Photos",typeof(byte[]))]
+        [TestCase("Photo",typeof(byte[]))]
         public void Type_ShouldHaveProperty_(string propertyName,Type propertyType)
         {
             //---------------Set up test pack-------------------
