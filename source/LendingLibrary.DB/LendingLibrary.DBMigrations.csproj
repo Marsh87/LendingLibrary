@@ -53,11 +53,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MigrationsRunner.cs" />
+    <Compile Include="Migrations\Migration_201601291433_CreatePersonTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LendingLibrary.DataConstants\LendingLibrary.DataConstants.csproj">
+      <Project>{734eff78-c7dd-411f-9f0c-83e3c28a5d64}</Project>
+      <Name>LendingLibrary.DataConstants</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
