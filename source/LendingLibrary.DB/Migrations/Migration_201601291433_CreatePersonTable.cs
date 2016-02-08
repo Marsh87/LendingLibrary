@@ -13,8 +13,8 @@ namespace LendingLibrary.DB.Migrations
         {
             Create.Table(_Table.NAME)
                 .WithColumn(_Columns.PersonId).AsInt32().PrimaryKey().Identity()
-                .WithColumn(_Columns.FirstName).AsString(FieldSizes.HUMAN_NAME).NotNullable()
-                .WithColumn(_Columns.Surname).AsString(FieldSizes.HUMAN_NAME).NotNullable()
+                .WithColumn(_Columns.FirstName).AsString(FieldSizes.NAME).NotNullable()
+                .WithColumn(_Columns.Surname).AsString(FieldSizes.NAME).NotNullable()
                 .WithColumn(_Columns.Email).AsString(FieldSizes.EMAIL).Nullable()
                 .WithColumn(_Columns.PHONE_NUMBER).AsString(FieldSizes.PHONE).NotNullable()
                 .WithColumn(_Columns.Photo).AsBinary(Int32.MaxValue);

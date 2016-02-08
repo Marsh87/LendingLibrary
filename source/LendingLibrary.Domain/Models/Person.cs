@@ -6,9 +6,9 @@ namespace LendingLibrary.Domain.Models
     public class Person
     {
         public int PersonId { get; set; }
-        [MaxLength(FieldSizes.HUMAN_NAME)]
+        [MaxLength(FieldSizes.NAME)]
         public string FirstName { get; set;}
-        [MaxLength(FieldSizes.HUMAN_NAME)]
+        [MaxLength(FieldSizes.NAME)]
         public string Surname { get; set;}
         [MaxLength(FieldSizes.PHONE)]
         public string PhoneNumber { get; set;}

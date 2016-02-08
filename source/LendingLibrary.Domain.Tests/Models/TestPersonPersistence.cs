@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LendingLibrary.DB;
 using LendingLibrary.Domain.Models;
 using LendingLibrary.Domain.Tests.Builders;
-using NUnit.Framework.Internal;
 using NUnit.Framework;
-using PeanutButter.FluentMigrator;
 using PeanutButter.TempDb.LocalDb;
 using PeanutButter.Utils.Entity;
 
@@ -59,10 +54,6 @@ namespace LendingLibrary.Domain.Tests.Models
         {
             var person = new PersonBuilder()
                 .WithRandomProps()
-                .WithFirstName()
-                .WithSurname()
-                .WithEmail()
-                .WithPhoneNumber()
                 .Build();
             return person;
         }

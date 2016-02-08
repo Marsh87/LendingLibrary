@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.DataConstant
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.DBMigrations", "LendingLibrary.DB\LendingLibrary.DBMigrations.csproj", "{2019D053-7A78-4F3A-A8D1-41E767A5CB4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.Repositories.Tests", "LendingLibray.Repositories.Tests\LendingLibrary.Repositories.Tests.csproj", "{23F3930C-FAAA-4EA2-9B3F-3B1EE0AFD3F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.Repositories", "LendingLibrary.Repositories\LendingLibrary.Repositories.csproj", "{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{2019D053-7A78-4F3A-A8D1-41E767A5CB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2019D053-7A78-4F3A-A8D1-41E767A5CB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2019D053-7A78-4F3A-A8D1-41E767A5CB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F3930C-FAAA-4EA2-9B3F-3B1EE0AFD3F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F3930C-FAAA-4EA2-9B3F-3B1EE0AFD3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F3930C-FAAA-4EA2-9B3F-3B1EE0AFD3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F3930C-FAAA-4EA2-9B3F-3B1EE0AFD3F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
