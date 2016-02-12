@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LendingLibrary.Web.Tests</RootNamespace>
     <AssemblyName>LendingLibrary.Web.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,9 @@
       <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PeanutButter.RandomGenerators">
+      <HintPath>..\packages\PeanutButter.RandomGenerators.1.1.0\lib\net40\PeanutButter.RandomGenerators.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -60,7 +64,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\PersonViewModelBuilder.cs" />
     <Compile Include="Controllers\TestHomeController.cs" />
+    <Compile Include="Controllers\TestPersonController.cs" />
     <Compile Include="IoC\TestDependencyInjectionUtility.cs" />
     <Compile Include="IoC\TestWindsorBootstrapper.cs" />
     <Compile Include="IoC\TestWindsorControllerFactory.cs" />
@@ -71,6 +77,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LendingLibrary.Repositories\LendingLibrary.Repositories.csproj">
+      <Project>{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}</Project>
+      <Name>LendingLibrary.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LendingLibrary.Web\LendingLibrary.Web.csproj">
       <Project>{7AE9F060-4137-4F0B-BC60-9A9564493EEE}</Project>
       <Name>LendingLibrary.Web</Name>

@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel;
-using Castle.Windsor;
-using LendingLibrary.Web.Controllers;
 using LendingLibrary.Web.IoC;
 using NSubstitute;
 using NUnit.Framework;

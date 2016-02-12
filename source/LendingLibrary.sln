@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.Repositories
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.Repositories", "LendingLibrary.Repositories\LendingLibrary.Repositories.csproj", "{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.Mapping", "LendingLibrary.Mapping\LendingLibrary.Mapping.csproj", "{3B3AC652-4314-4D02-BF6B-9D4D96837949}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B3AC652-4314-4D02-BF6B-9D4D96837949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B3AC652-4314-4D02-BF6B-9D4D96837949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B3AC652-4314-4D02-BF6B-9D4D96837949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B3AC652-4314-4D02-BF6B-9D4D96837949}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

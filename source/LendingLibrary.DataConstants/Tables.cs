@@ -13,7 +13,7 @@
                 public const string Surname = "Surname";
                 public const string PHONE_NUMBER = "PhoneNumber";
                 public const string Email = "Email";
-                public const string Photo = "Photo";
+                public const string Photo = "Photo";                
             }
         }
     }

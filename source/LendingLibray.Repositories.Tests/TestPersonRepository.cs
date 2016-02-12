@@ -5,8 +5,6 @@ using LendingLibrary.Domain.Tests;
 using LendingLibrary.Domain.Tests.Builders;
 using NSubstitute;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
-using PeanutButter.TestUtils.Entity;
 using PeanutButter.TestUtils.Generic;
 
 namespace LendingLibrary.Repositories.Tests
@@ -55,27 +53,39 @@ namespace LendingLibrary.Repositories.Tests
             sut.ShouldImplement<IPersonRepository>();
         }
 
-        [Ignore("Fluent Migrator Version Mismatch")]
         [Test]
-        public void Save_GivenPersonEntity_ShouldSave()
+        public void Save_GivenNewPersonEntity_ShouldSave()
         {
             //---------------Set up test pack-------------------
-            var person = PersonBuilder.BuildRandom();
+            var person1 = new PersonBuilder()
+                .WithRandomProps()
+                .WithId(0)
+                .Build();
+            var person2 = new PersonBuilder()
+                .WithRandomProps()
+                .WithId(1)
+                .Build();
             using (var context = GetContext())
             {
-                var sut=Create(context);
-                //---------------Assert Precondition----------------
-                CollectionAssert.IsEmpty(context.People);
+                context.People.Add(person2);
+                context.SaveChanges();
+                var existingperson = context.People.FirstOrDefault(x => x.PersonId == person1.PersonId);
+                Assert.IsNull(existingperson);
+            }
+            using (var context = GetContext())
+            { 
+                var sut = Create(context);
+                //---------------Assert Precondition---------------
                 //---------------Execute Test ----------------------
-                sut.Save(person);
+                var expectedId=sut.Save(person1);
                 //---------------Test Result -----------------------
-                var savedEntiy = context.People.FirstOrDefault();
+                var savedEntiy = context.People.FirstOrDefault(x=>x.PersonId==expectedId);
                 Assert.IsNotNull(savedEntiy);
-                Assert.AreEqual(person.Email,savedEntiy.Email);
-                Assert.AreEqual(person.FirstName,savedEntiy.FirstName);
-                Assert.AreEqual(person.PhoneNumber,savedEntiy.PhoneNumber);
-                Assert.AreEqual(person.Photo,savedEntiy.Photo);
-                Assert.AreEqual(person.Surname,savedEntiy.Surname);
+                Assert.AreEqual(person1.Email,savedEntiy.Email);
+                Assert.AreEqual(person1.FirstName,savedEntiy.FirstName);
+                Assert.AreEqual(person1.PhoneNumber,savedEntiy.PhoneNumber);
+                Assert.AreEqual(person1.Photo,savedEntiy.Photo);
+                Assert.AreEqual(person1.Surname,savedEntiy.Surname);
             }
         }
 

@@ -1,11 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using NUnit.Framework;
 using PeanutButter.TempDb.LocalDb;
 using PeanutButter.TestUtils.Generic;
-using PeanutButter.Utils;
 
 namespace LendingLibrary.Domain.Tests
 {

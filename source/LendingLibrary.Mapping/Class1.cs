@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LendingLibrary.Repositories
+namespace LendingLibrary.Mapping
 {
     public class Class1
     {

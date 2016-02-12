@@ -14,9 +14,11 @@ namespace LendingLibrary.Repositories
             _lendingLibraryContext = lendingLibraryContext;
         }
 
-        public void Save(Person person)
+        public int Save(Person person)
         {
-            throw new NotImplementedException();
+            _lendingLibraryContext.People.Add(person);
+            _lendingLibraryContext.SaveChanges();
+            return person.PersonId;
         }
     }
 }
