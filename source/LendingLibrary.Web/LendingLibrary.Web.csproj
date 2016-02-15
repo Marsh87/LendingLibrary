@@ -54,6 +54,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PeanutButter.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PeanutButter.Utils.1.1.33\lib\net40\PeanutButter.Utils.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -247,10 +251,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Person\Create.cshtml" />
+    <None Include="Views\Person\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Person\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -265,6 +270,10 @@
     <ProjectReference Include="..\LendingLibrary.DataConstants\LendingLibrary.DataConstants.csproj">
       <Project>{734EFF78-C7DD-411F-9F0C-83E3C28A5D64}</Project>
       <Name>LendingLibrary.DataConstants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LendingLibrary.Domain\LendingLibrary.Domain.csproj">
+      <Project>{5C167908-1493-42CD-8AD8-A05075532E11}</Project>
+      <Name>LendingLibrary.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\LendingLibrary.Repositories\LendingLibrary.Repositories.csproj">
       <Project>{C0494DFC-69A5-4C7D-AA91-80EDA72C3376}</Project>

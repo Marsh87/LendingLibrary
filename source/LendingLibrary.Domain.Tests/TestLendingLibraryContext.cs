@@ -1,6 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
+using NSubstitute.Exceptions;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using PeanutButter.TempDb.LocalDb;
 using PeanutButter.TestUtils.Generic;
 
@@ -65,6 +68,28 @@ namespace LendingLibrary.Domain.Tests
                     }
                 }
 
+            }
+        }
+
+        [Test]
+        public void ParameterlessConstructor_ShouldUseConnectionStringCalled_DefaultConnection()
+        {
+            //---------------Set up test pack-------------------
+
+            //---------------Assert Precondition----------------
+            using (var tempDb = new TempDBLocalDb())
+            {
+                //---------------Execute Test ----------------------
+                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+                connectionStringsSection.ConnectionStrings["DefaultConnection"].ConnectionString =
+                    tempDb.ConnectionString;
+                config.Save();
+                ConfigurationManager.RefreshSection("connectionStrings");
+                var sut = new LendingLibraryContext();
+                //---------------Test Result -----------------------
+                var conn = sut.Database.Connection;
+                Assert.AreEqual(tempDb.ConnectionString, conn.ConnectionString);
             }
         }
     }

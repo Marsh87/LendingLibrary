@@ -10,6 +10,11 @@ namespace LendingLibrary.Domain
 
         private DbConnection _dbConnection;
 
+        public LendingLibraryContext() : base("DefaultConnection")
+        {
+            
+        }
+
         public LendingLibraryContext(DbConnection dbConnection): base(dbConnection, true)
         {
             _dbConnection = dbConnection;

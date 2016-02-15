@@ -1,4 +1,7 @@
-﻿using Castle.Windsor;
+﻿using System;
+using Castle.Windsor;
+using LendingLibrary.Domain;
+using LendingLibrary.Repositories;
 using LendingLibrary.Web.Controllers;
 using LendingLibrary.Web.IoC;
 using NUnit.Framework;
@@ -18,6 +21,7 @@ namespace LendingLibrary.Web.Tests.IoC
             Assert.DoesNotThrow(() => Create());
             //---------------Test Result -----------------------
         }
+
         [Test]
         public void Bootstrap_ShouldReturnContainer()
         {
@@ -45,6 +49,22 @@ namespace LendingLibrary.Web.Tests.IoC
             Assert.IsNotNull(container);
             var homeController=container.Resolve<HomeController>();
             Assert.IsNotNull(homeController);
+        }
+
+        [TestCase(typeof(ILendingLibraryContext), typeof(LendingLibraryContext))]
+        [TestCase(typeof(IPersonRepository), typeof(PersonRepository))]
+        public void Bootstrap_ShouldReturnContainerAbleToResolve_(Type serviceType, Type expectedResolution)
+        {
+            //---------------Set up test pack-------------------
+            var sut = Create();
+            var container = sut.Bootstrap();
+            //---------------Assert Precondition----------------
+
+            //---------------Execute Test ----------------------
+            var result = container.Resolve(serviceType);
+            //---------------Test Result -----------------------
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf(expectedResolution, result);
         }
 
         private static WindsorBootstrapper Create()
