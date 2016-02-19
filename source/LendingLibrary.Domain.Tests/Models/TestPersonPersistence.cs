@@ -2,6 +2,7 @@
 using System.Linq;
 using LendingLibrary.DB;
 using LendingLibrary.Domain.Models;
+using LendingLibray.Repositories.Tests;
 using NUnit.Framework;
 using PeanutButter.RandomGenerators;
 using PeanutButter.TempDb.LocalDb;
@@ -52,7 +53,13 @@ namespace LendingLibrary.Domain.Tests.Models
 
         private static Person CreatePerson()
         {
-            return RandomValueGen.GetRandomValue<Person>();
+
+            return new PersonBuilder().WithRandomProps()
+                                        .WithId(0)
+                                        .WithFirstName()
+                                        .WithSurname()
+                                        .WithPhoneNumber()
+                                       .Build();
         }
     }
 }

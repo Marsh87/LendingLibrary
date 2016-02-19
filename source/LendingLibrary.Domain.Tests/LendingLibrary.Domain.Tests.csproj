@@ -98,6 +98,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\PersonBuilder.cs" />
     <Compile Include="LendingLibraryContextPerisitenceTestFixtureBase.cs" />
     <Compile Include="Models\TestPerson.cs" />
     <Compile Include="Models\TestPersonPersistence.cs" />
@@ -121,9 +122,7 @@
   <ItemGroup>
     <Content Include="GenericBuilderTests-ExampleUsage.cs.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Builders\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
