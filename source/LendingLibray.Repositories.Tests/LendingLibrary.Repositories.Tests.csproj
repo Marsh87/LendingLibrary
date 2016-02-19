@@ -51,35 +51,35 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PeanutButter.FluentMigrator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PeanutButter.FluentMigrator.1.1.0\lib\net40\PeanutButter.FluentMigrator.dll</HintPath>
+      <HintPath>..\packages\PeanutButter.FluentMigrator.1.1.36\lib\net40\PeanutButter.FluentMigrator.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PeanutButter.RandomGenerators, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PeanutButter.RandomGenerators.1.1.0\lib\net40\PeanutButter.RandomGenerators.dll</HintPath>
+      <HintPath>..\packages\PeanutButter.RandomGenerators.1.1.36\lib\net40\PeanutButter.RandomGenerators.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PeanutButter.TempDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PeanutButter.TempDb.1.1.0\lib\net40\PeanutButter.TempDb.dll</HintPath>
+      <HintPath>..\packages\PeanutButter.TempDb.1.1.36\lib\net40\PeanutButter.TempDb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PeanutButter.TempDb.LocalDb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PeanutButter.TempDb.LocalDb.1.1.0\lib\net40\PeanutButter.TempDb.LocalDb.dll</HintPath>
+      <HintPath>..\packages\PeanutButter.TempDb.LocalDb.1.1.36\lib\net40\PeanutButter.TempDb.LocalDb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PeanutButter.TestUtils.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PeanutButter.TestUtils.Entity.1.1.28\lib\net40\PeanutButter.TestUtils.Entity.dll</HintPath>
+      <HintPath>..\packages\PeanutButter.TestUtils.Entity.1.1.36\lib\net40\PeanutButter.TestUtils.Entity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PeanutButter.TestUtils.Generic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PeanutButter.TestUtils.Generic.1.1.0\lib\net40\PeanutButter.TestUtils.Generic.dll</HintPath>
+      <HintPath>..\packages\PeanutButter.TestUtils.Generic.1.1.36\lib\net40\PeanutButter.TestUtils.Generic.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PeanutButter.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PeanutButter.Utils.1.1.0\lib\net40\PeanutButter.Utils.dll</HintPath>
+      <HintPath>..\packages\PeanutButter.Utils.1.1.36\lib\net40\PeanutButter.Utils.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PeanutButter.Utils.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PeanutButter.Utils.Entity.1.1.0\lib\net40\PeanutButter.Utils.Entity.dll</HintPath>
+      <HintPath>..\packages\PeanutButter.Utils.Entity.1.1.36\lib\net40\PeanutButter.Utils.Entity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -93,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PersonBuilder.cs" />
     <Compile Include="TestPersonRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

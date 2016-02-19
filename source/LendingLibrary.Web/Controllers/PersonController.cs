@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using AutoMapper;
 using LendingLibrary.Repositories;
 using LendingLibrary.Web.Models;
 
@@ -8,11 +9,14 @@ namespace LendingLibrary.Web.Controllers
     public class PersonController : Controller
     {
         private readonly IPersonRepository _personRepository;
+        private readonly IMappingEngine _mappingEngine;
 
-        public PersonController(IPersonRepository personRepository)
+        public PersonController(IPersonRepository personRepository, IMappingEngine mappingEngine)
         {
-            if (personRepository == null) throw new ArgumentNullException("personRepository");
+            if (personRepository == null) throw new ArgumentNullException(nameof(personRepository));
+            if (mappingEngine == null) throw new ArgumentNullException(nameof(mappingEngine));
             _personRepository = personRepository;
+            _mappingEngine = mappingEngine;
         }
 
         // GET: Person

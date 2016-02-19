@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Castle.MicroKernel.ModelBuilder.Descriptors;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -21,6 +22,8 @@ namespace LendingLibrary.Web.IoC
         PerWebRequest
     }
 
+
+
     public class WindsorBootstrapper
     {
         private readonly WindsorLifestyles _defaultLifeStyle;
@@ -33,7 +36,13 @@ namespace LendingLibrary.Web.IoC
         {
             var container = new WindsorContainer();
             RegisterAllControllersFromThisAssembly(container);
+            container.RegisterAllOneToOneResolutionsIn(GetType().Assembly);
             container.RegisterWithLifestyle<ILendingLibraryContext, LendingLibraryContext>(_defaultLifeStyle);
+            container.Register(Component.For<IMapper>().UsingFactoryMethod(k =>
+            {
+                var config = container.Resolve<IMapperConfigFactory>().GetConfiguration();
+                return config.CreateMapper();
+            }).LifestyleTransient());
             container.RegisterAllOneToOneResolutionsIn(typeof(ILendingLibraryContext).Assembly);
             container.RegisterAllOneToOneResolutionsIn(typeof(IPersonRepository).Assembly);
             return container;
@@ -102,7 +111,8 @@ namespace LendingLibrary.Web.IoC
                 if (implementingTypes.Length != 1)
                     return;
                 var implementingType = implementingTypes[0];
-                if (container.Kernel.HasComponent(iface))
+                if (container.Kernel.HasComponent(iface) ||
+                    container.Kernel.HasComponent(iface.Name))
                     return;
                 container.Register(Component.For(iface)
                     .ImplementedBy(implementingType)

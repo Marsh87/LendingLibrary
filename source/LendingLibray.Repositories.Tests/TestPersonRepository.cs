@@ -2,7 +2,7 @@
 using System.Linq;
 using LendingLibrary.Domain;
 using LendingLibrary.Domain.Tests;
-using LendingLibrary.Domain.Tests.Builders;
+using LendingLibray.Repositories.Tests;
 using NSubstitute;
 using NUnit.Framework;
 using PeanutButter.TestUtils.Generic;
@@ -57,14 +57,18 @@ namespace LendingLibrary.Repositories.Tests
         public void Save_GivenNewPersonEntity_ShouldSave()
         {
             //---------------Set up test pack-------------------
-            var person1 = new PersonBuilder()
-                .WithRandomProps()
-                .WithId(0)
-                .Build();
-            var person2 = new PersonBuilder()
-                .WithRandomProps()
-                .WithId(1)
-                .Build();
+            var person1 = new PersonBuilder().WithRandomProps()
+                                        .WithId(0)
+                                        .WithFirstName()
+                                        .WithSurname()
+                                        .WithPhoneNumber()
+                                        .Build();
+            var person2 = new PersonBuilder().WithRandomProps()
+                                        .WithId(1)
+                                        .WithFirstName()
+                                        .WithSurname()
+                                        .WithPhoneNumber()
+                                        .Build();
             using (var context = GetContext())
             {
                 context.People.Add(person2);

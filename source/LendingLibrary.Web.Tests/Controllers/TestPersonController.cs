@@ -3,12 +3,14 @@ using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using AutoMapper;
 using LendingLibrary.Repositories;
 using LendingLibrary.Web.Controllers;
 using LendingLibrary.Web.Models;
-using LendingLibrary.Web.Tests.Builders;
 using NSubstitute;
 using NUnit.Framework;
+using PeanutButter.RandomGenerators;
+using PeanutButter.TestUtils.Generic;
 
 namespace LendingLibrary.Web.Tests.Controllers
 {
@@ -26,22 +28,21 @@ namespace LendingLibrary.Web.Tests.Controllers
             //---------------Execute Test ----------------------
 
             //---------------Test Result -----------------------
-            Assert.DoesNotThrow(()=>new PersonController(Substitute.For<IPersonRepository>()));
+            Assert.DoesNotThrow(()=>new PersonController(Substitute.For<IPersonRepository>(),Substitute.For<IMappingEngine>()));
         }
 
-        [Test]
-        public void Construct_GivenNullPersonRepository_ShoulThrowANE()
+        [TestCase("personRepository", typeof(IPersonRepository))]
+        [TestCase("mappingEngine", typeof(IMappingEngine))]
+        public void Construct_ShouldRequire_(string parameterName, Type parameterType)
         {
             //---------------Set up test pack-------------------
             
             //---------------Assert Precondition----------------
 
             //---------------Execute Test ----------------------
-            var ex = Assert.Throws<ArgumentNullException>(() => new PersonController(null));
+            ConstructorTestUtils.ShouldExpectNonNullParameterFor<PersonController>(parameterName, parameterType);
             //---------------Test Result -----------------------
-            Assert.AreEqual("personRepository",ex.ParamName);
         }
-
         [Test]
         public void Create_Get_ShouldReturnView()
         {
@@ -59,7 +60,7 @@ namespace LendingLibrary.Web.Tests.Controllers
         public void Create_Post__GivenInvalidPersonViewModel_ShouldReturnViewModel()
         {
             //---------------Set up test pack-------------------
-            var personViewModel = PersonViewModelBuilder.BuildRandom();
+            var personViewModel = RandomValueGen.GetRandomValue<PersonViewModel>();
             var sut=Create();
             FakeInvalidModelState(sut);
             //---------------Assert Precondition----------------
@@ -76,7 +77,7 @@ namespace LendingLibrary.Web.Tests.Controllers
         public void Create_Post_GivenValidPersonViewNodel_ShouldReturnBinaryData ()
         {
 
-            var personViewModel = PersonViewModelBuilder.BuildRandom();
+            var personViewModel = RandomValueGen.GetRandomValue<PersonViewModel>();
             var httpContextSub = Substitute.For<HttpContextBase>();
             var serverSub = Substitute.For<HttpServerUtilityBase>();
             serverSub.MapPath("~/app_data").Returns(@"c:\work\app_data");
@@ -110,9 +111,13 @@ namespace LendingLibrary.Web.Tests.Controllers
         }
 
 
-        private PersonController Create(IPersonRepository personRepository=null)
+        private PersonController Create(IPersonRepository personRepository=null,
+                                        IMappingEngine mappingEngine = null)
         {
-            return new PersonController(personRepository??Substitute.For<IPersonRepository>());
+            return new PersonController(
+                personRepository??Substitute.For<IPersonRepository>(),
+                mappingEngine ?? Substitute.For<IMappingEngine>()
+                );
         }
     }
 }

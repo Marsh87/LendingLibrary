@@ -70,7 +70,7 @@ namespace LendingLibrary.Domain.Tests
 
             }
         }
-        [Ignore("Weirdness would connection string")]
+        [Ignore("TODO:Investigate why works in Resharper not in CI")]
         [Test]
         public void ParameterlessConstructor_ShouldUseConnectionStringCalled_DefaultConnection()
         {
@@ -81,7 +81,7 @@ namespace LendingLibrary.Domain.Tests
             {
                 //---------------Execute Test ----------------------
                 var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+                var connectionStringsSection =(ConnectionStringsSection)config.GetSection("connectionStrings");
                 connectionStringsSection.ConnectionStrings["DefaultConnection"].ConnectionString =
                     tempDb.ConnectionString;
                 config.Save();

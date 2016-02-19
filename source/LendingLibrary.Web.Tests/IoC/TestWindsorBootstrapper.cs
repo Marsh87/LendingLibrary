@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using Castle.Windsor;
 using LendingLibrary.Domain;
 using LendingLibrary.Repositories;
@@ -53,6 +54,8 @@ namespace LendingLibrary.Web.Tests.IoC
 
         [TestCase(typeof(ILendingLibraryContext), typeof(LendingLibraryContext))]
         [TestCase(typeof(IPersonRepository), typeof(PersonRepository))]
+        [TestCase(typeof(IMapperConfigFactory), typeof(MapperConfigFactory))]
+        [TestCase(typeof(IMapper), typeof(Mapper))]
         public void Bootstrap_ShouldReturnContainerAbleToResolve_(Type serviceType, Type expectedResolution)
         {
             //---------------Set up test pack-------------------

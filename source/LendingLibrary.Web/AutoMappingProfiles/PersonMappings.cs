@@ -2,9 +2,9 @@
 using LendingLibrary.Domain.Models;
 using LendingLibrary.Web.Models;
 
-namespace LendingLibrary.Mapping.AutoMappingProfiles
+namespace LendingLibrary.Web.AutoMappingProfiles
 {
-    public class DELETE_ME_PersonMappings:Profile
+    public class PersonMappings:Profile
     {
         protected override void Configure()
         {
