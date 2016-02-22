@@ -4,8 +4,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using AutoMapper;
+using LendingLibrary.Domain.Models;
 using LendingLibrary.Repositories;
+using LendingLibrary.Web.AutoMappingProfiles;
 using LendingLibrary.Web.Controllers;
+using LendingLibrary.Web.IoC;
 using LendingLibrary.Web.Models;
 using NSubstitute;
 using NUnit.Framework;
@@ -28,11 +31,11 @@ namespace LendingLibrary.Web.Tests.Controllers
             //---------------Execute Test ----------------------
 
             //---------------Test Result -----------------------
-            Assert.DoesNotThrow(()=>new PersonController(Substitute.For<IPersonRepository>(),Substitute.For<IMappingEngine>()));
+            Assert.DoesNotThrow(()=>new PersonController(Substitute.For<IPersonRepository>(),Substitute.For<IMapper>()));
         }
 
         [TestCase("personRepository", typeof(IPersonRepository))]
-        [TestCase("mappingEngine", typeof(IMappingEngine))]
+        [TestCase("mapper", typeof(IMapper))]
         public void Construct_ShouldRequire_(string parameterName, Type parameterType)
         {
             //---------------Set up test pack-------------------
@@ -74,7 +77,7 @@ namespace LendingLibrary.Web.Tests.Controllers
         }
 
         [Test]
-        public void Create_Post_GivenValidPersonViewNodel_ShouldReturnBinaryData ()
+        public void Create_Post_GivenValidPersonViewNodel_ShouldSetPhoto ()
         {
 
             var personViewModel = RandomValueGen.GetRandomValue<PersonViewModel>();
@@ -105,6 +108,47 @@ namespace LendingLibrary.Web.Tests.Controllers
             Assert.AreEqual(fileMock.InputStream, model.PhotoAttachment.InputStream);
             Assert.AreEqual(content, model.Photo);
         }
+
+        [Test]
+        public void Create_Post_GivenValidPersonViewModel_ShouldSavePerson()
+        {
+            //---------------Set up test pack-------------------
+            var personViewModel= RandomValueGen.GetRandomValue<PersonViewModel>();
+            var person = RandomValueGen.GetRandomValue<Person>();
+            var personRepository = Substitute.For<IPersonRepository>();
+            var mapper = Substitute.For<IMapper>();
+            mapper.Map<PersonViewModel, Person>(personViewModel).Returns(person);
+            var sut = Create(personRepository,mapper);
+            //---------------Assert Precondition----------------
+            personRepository.DidNotReceive().Save(Arg.Any<Person>());
+            //---------------Execute Test ----------------------
+            sut.Create(personViewModel);
+            //---------------Test Result -----------------------
+            mapper.Received(1).Map<PersonViewModel, Person>(personViewModel);
+            personRepository.Received(1).Save(person);
+
+        }
+
+        [Test]
+        public void Create_Post_GivenValidPersonViewModel_ShouldRedirectToIndex()
+        {
+            //---------------Set up test pack-------------------
+            var personViewModel= RandomValueGen.GetRandomValue<PersonViewModel>();
+            var person = RandomValueGen.GetRandomValue<Person>();
+            var personRepository = Substitute.For<IPersonRepository>();
+            var mapper = Substitute.For<IMapper>();
+            mapper.Map<PersonViewModel, Person>(personViewModel).Returns(person);
+            var sut = Create(personRepository,mapper);
+            //---------------Assert Precondition----------------
+            personRepository.DidNotReceive().Save(Arg.Any<Person>());
+            //---------------Execute Test ----------------------
+            var result=sut.Create(personViewModel) as RedirectToRouteResult;
+            //---------------Test Result -----------------------
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Index",result.RouteValues["action"]);
+            Assert.IsNull(result.RouteValues["controller"]);
+
+        }
         private static void FakeInvalidModelState(PersonController controller)
         {
             controller.ModelState.AddModelError("", "Test Error");
@@ -112,12 +156,17 @@ namespace LendingLibrary.Web.Tests.Controllers
 
 
         private PersonController Create(IPersonRepository personRepository=null,
-                                        IMappingEngine mappingEngine = null)
+                                        IMapper mapper = null)
         {
             return new PersonController(
                 personRepository??Substitute.For<IPersonRepository>(),
-                mappingEngine ?? Substitute.For<IMappingEngine>()
+                mapper ??ResolveMapper()
                 );
+        }
+
+        public static IMapper ResolveMapper()
+        {
+            return new WindsorBootstrapper().Bootstrap().Resolve<IMapper>();
         }
     }
 }

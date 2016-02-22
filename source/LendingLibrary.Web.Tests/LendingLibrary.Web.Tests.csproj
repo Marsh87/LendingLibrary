@@ -87,7 +87,6 @@
   <ItemGroup>
     <Compile Include="Controllers\TestHomeController.cs" />
     <Compile Include="Controllers\TestPersonController.cs" />
-    <Compile Include="IoC\TestAutoMapperInstaller.cs" />
     <Compile Include="IoC\TestAutoMapperMappings.cs" />
     <Compile Include="IoC\TestDependencyInjectionUtility.cs" />
     <Compile Include="IoC\TestWindsorBootstrapper.cs" />

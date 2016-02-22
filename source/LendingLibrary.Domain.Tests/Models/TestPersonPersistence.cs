@@ -4,7 +4,6 @@ using LendingLibrary.DB;
 using LendingLibrary.Domain.Models;
 using LendingLibray.Repositories.Tests;
 using NUnit.Framework;
-using PeanutButter.RandomGenerators;
 using PeanutButter.TempDb.LocalDb;
 using PeanutButter.Utils.Entity;
 

@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using AutoMapper;
 using Castle.MicroKernel;
 using LendingLibrary.Web.IoC;
 using NSubstitute;
@@ -22,7 +23,7 @@ namespace LendingLibrary.Web.Tests.IoC
             //---------------Execute Test ----------------------
 
             //---------------Test Result -----------------------
-            Assert.DoesNotThrow(() => Create());
+            Assert.DoesNotThrow(() => ResolveMapper());
         }
 
         [Test]
@@ -117,10 +118,10 @@ namespace LendingLibrary.Web.Tests.IoC
             return windsorControllerFactory;
         }
 
-        private static WindsorControllerFactory Create(IKernel kernel = null)
+        private static WindsorControllerFactory ResolveMapper(IKernel kernel = null)
         {
             return new WindsorControllerFactory(kernel ?? Substitute.For<IKernel>());
         }
-
+       
     }
 }
