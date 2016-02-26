@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
 using LendingLibrary.Domain.Models;
@@ -23,8 +24,9 @@ namespace LendingLibrary.Web.Controllers
         // GET: Person
         public ActionResult Index()
         {
-          
-            return View();
+            var persons = _personRepository.GetAllPersons();
+            var model=_mapper.Map<IEnumerable<Person>,IEnumerable<PersonRowViewModel>> (persons);
+            return View(model);
         }
 
         [HttpGet]

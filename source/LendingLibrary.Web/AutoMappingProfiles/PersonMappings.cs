@@ -10,6 +10,7 @@ namespace LendingLibrary.Web.AutoMappingProfiles
         {
             CreateMap<PersonViewModel, Person>();
             CreateMap<Person, PersonViewModel>();
+            CreateMap<Person, PersonRowViewModel>();
         }
     }
 }

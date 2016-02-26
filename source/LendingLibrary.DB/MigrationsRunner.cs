@@ -10,5 +10,7 @@ namespace LendingLibrary.DB
             : base(typeof(MigrationsRunner).Assembly, connectionString, textWriterAction)
         {
         }
+
+        
     }
 }

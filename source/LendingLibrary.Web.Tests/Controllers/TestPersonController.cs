@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -46,6 +48,32 @@ namespace LendingLibrary.Web.Tests.Controllers
             ConstructorTestUtils.ShouldExpectNonNullParameterFor<PersonController>(parameterName, parameterType);
             //---------------Test Result -----------------------
         }
+
+        [Test]
+        public void Index_ShouldReturnPersonRowViewModel()
+        {
+            //---------------Set up test pack-------------------
+            var personList = new List<Person>();
+            var person = RandomValueGen.GetRandomValue<Person>();
+            personList.Add(person);
+            var personRepository = Substitute.For<IPersonRepository>();
+            var mapper = ResolveMapper();
+            personRepository.GetAllPersons().Returns(personList);
+            var sut = Create(personRepository,mapper);
+            //---------------Assert Precondition----------------
+
+            //---------------Execute Test ----------------------
+            var result = sut.Index() as ViewResult;
+            //---------------Test Result -----------------------
+            var model = result.Model as IEnumerable<PersonRowViewModel>;
+            Assert.AreEqual(person.Email,model.FirstOrDefault().Email);
+            Assert.AreEqual(person.PersonId, model.FirstOrDefault().PersonId);
+            Assert.AreEqual(person.PhoneNumber,model.FirstOrDefault().PhoneNumber);
+            Assert.AreEqual(person.Photo,model.FirstOrDefault().Photo);
+            Assert.AreEqual(person.Surname,model.FirstOrDefault().Surname);
+
+        }
+
         [Test]
         public void Create_Get_ShouldReturnView()
         {

@@ -53,7 +53,19 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentMigrator, Version=1.6.1.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentMigrator.1.6.1\lib\40\FluentMigrator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentMigrator.Runner, Version=1.6.1.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentMigrator.Runner.1.6.1\lib\40\FluentMigrator.Runner.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PeanutButter.FluentMigrator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PeanutButter.FluentMigrator.1.1.8\lib\net40\PeanutButter.FluentMigrator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PeanutButter.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PeanutButter.Utils.1.1.33\lib\net40\PeanutButter.Utils.dll</HintPath>
       <Private>True</Private>
@@ -176,6 +188,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="AutoMappingProfiles\PersonMappings.cs" />
+    <Compile Include="Config\IConnectionStringConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -183,6 +196,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IoC\ConnectionStringSettingsCollectionExtensions.cs" />
     <Compile Include="IoC\Installers\EFInstaller.cs" />
     <Compile Include="IoC\Installers\RepositoryInstaller.cs" />
     <Compile Include="IoC\MapperConfigFactory.cs" />
@@ -191,6 +205,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PersonRowViewModel.cs" />
     <Compile Include="Models\PersonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -252,7 +267,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <None Include="Views\Person\Create.cshtml" />
+    <Content Include="Views\Person\Create.cshtml" />
     <None Include="Views\Person\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +286,10 @@
     <ProjectReference Include="..\LendingLibrary.DataConstants\LendingLibrary.DataConstants.csproj">
       <Project>{734EFF78-C7DD-411F-9F0C-83E3C28A5D64}</Project>
       <Name>LendingLibrary.DataConstants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LendingLibrary.DB\LendingLibrary.DBMigrations.csproj">
+      <Project>{2019D053-7A78-4F3A-A8D1-41E767A5CB4C}</Project>
+      <Name>LendingLibrary.DBMigrations</Name>
     </ProjectReference>
     <ProjectReference Include="..\LendingLibrary.Domain\LendingLibrary.Domain.csproj">
       <Project>{5C167908-1493-42CD-8AD8-A05075532E11}</Project>

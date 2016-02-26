@@ -18,6 +18,11 @@ namespace LendingLibrary.Web.Tests.IoC
         }
 
         [TestCase("PersonId")]
+        [TestCase("FirstName")]
+        [TestCase("Surname")]
+        [TestCase("PhoneNumber")]
+        [TestCase("Email")]
+        [TestCase("Photo")]
         public void PersonViewModel_To_Person_ShouldMap_(string propertyName)
         {
             //---------------Set up test pack-------------------
@@ -27,6 +32,25 @@ namespace LendingLibrary.Web.Tests.IoC
 
             //---------------Execute Test ----------------------
             var result = sut.Map<PersonViewModel, Person>(input);
+            //---------------Test Result -----------------------
+            PropertyAssert.AreEqual(input,result,propertyName);
+        }
+
+        [TestCase("PersonId")]
+        [TestCase("FirstName")]
+        [TestCase("Surname")]
+        [TestCase("PhoneNumber")]
+        [TestCase("Email")]
+        [TestCase("Photo")]
+        public void Person_To_PersonRowViewModel_ShouldMap_(string propertyName)
+        {
+            //---------------Set up test pack-------------------
+            var input = RandomValueGen.GetRandomValue<Person>();
+            var sut = Create();
+            //---------------Assert Precondition----------------
+
+            //---------------Execute Test ----------------------
+            var result = sut.Map<Person, PersonRowViewModel>(input);
             //---------------Test Result -----------------------
             PropertyAssert.AreEqual(input,result,propertyName);
         }

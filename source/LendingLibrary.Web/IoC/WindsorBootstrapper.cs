@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Castle.Components.DictionaryAdapter;
 using Castle.MicroKernel.ModelBuilder.Descriptors;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using LendingLibrary.Domain;
 using LendingLibrary.Repositories;
+using LendingLibrary.Web.Config;
+using LendingLibrary.Web.IoC;
 using PeanutButter.Utils;
 
 namespace LendingLibrary.Web.IoC
@@ -23,9 +27,12 @@ namespace LendingLibrary.Web.IoC
     }
 
 
-
-    public class WindsorBootstrapper
+    public class WindsorBootstrapper:IWindsorBoootstrapper
     {
+        private static DictionaryAdapterFactory CreateDictionaryAdapterFactory()
+        {
+            return new DictionaryAdapterFactory();
+        }
         private readonly WindsorLifestyles _defaultLifeStyle;
 
         public WindsorBootstrapper(WindsorLifestyles defaultLifestyle = WindsorLifestyles.PerWebRequest)
@@ -34,6 +41,9 @@ namespace LendingLibrary.Web.IoC
         }
         public IWindsorContainer Bootstrap()
         {
+            var connectionStringsDictionary = ConfigurationManager.ConnectionStrings.AsDictionary();
+            var factory = CreateDictionaryAdapterFactory();
+            var connectionStringConfig = factory.GetAdapter<IConnectionStringConfig>(connectionStringsDictionary);
             var container = new WindsorContainer();
             RegisterAllControllersFromThisAssembly(container);
             container.RegisterAllOneToOneResolutionsIn(GetType().Assembly);
@@ -43,6 +53,9 @@ namespace LendingLibrary.Web.IoC
                 var config = container.Resolve<IMapperConfigFactory>().GetConfiguration();
                 return config.CreateMapper();
             }).LifestyleTransient());
+            container.Register(Component.For<IConnectionStringConfig>()
+                                        .UsingFactoryMethod(() => connectionStringConfig)
+                                );
             container.RegisterAllOneToOneResolutionsIn(typeof(ILendingLibraryContext).Assembly);
             container.RegisterAllOneToOneResolutionsIn(typeof(IPersonRepository).Assembly);
             return container;
@@ -55,6 +68,11 @@ namespace LendingLibrary.Web.IoC
                 .WithLifestyle(_defaultLifeStyle));
         }
 
+    }
+
+    public interface IWindsorBoootstrapper
+    {
+        IWindsorContainer Bootstrap();
     }
 
     public static class WindsorHelperExtensions
@@ -119,6 +137,7 @@ namespace LendingLibrary.Web.IoC
                     .LifestyleTransient());
             });
         }
+       
 
     }
 }

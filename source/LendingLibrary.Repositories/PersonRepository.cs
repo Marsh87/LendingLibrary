@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using LendingLibrary.Domain;
 using LendingLibrary.Domain.Models;
 
@@ -19,6 +22,11 @@ namespace LendingLibrary.Repositories
             _lendingLibraryContext.People.Add(person);
             _lendingLibraryContext.SaveChanges();
             return person.PersonId;
+        }
+
+        public IEnumerable<Person> GetAllPersons()
+        {
+            return _lendingLibraryContext.People.ToList();
         }
     }
 }
