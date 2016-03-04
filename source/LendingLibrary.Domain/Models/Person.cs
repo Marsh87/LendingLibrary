@@ -15,5 +15,6 @@ namespace LendingLibrary.Domain.Models
         [MaxLength(FieldSizes.EMAIL)]
         public string Email { get; set;}
         public byte[] Photo { get; set; }
+        public string Mimetype { get; set; }
     }
 }

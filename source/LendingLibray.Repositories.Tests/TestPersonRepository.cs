@@ -6,6 +6,7 @@ using LendingLibrary.Domain.Tests;
 using LendingLibray.Repositories.Tests;
 using NSubstitute;
 using NUnit.Framework;
+using PeanutButter.RandomGenerators;
 using PeanutButter.TestUtils.Generic;
 using PeanutButter.Utils.Entity;
 
@@ -82,6 +83,40 @@ namespace LendingLibrary.Repositories.Tests
                 Assert.AreEqual(person1.PhoneNumber,savedEntiy.PhoneNumber);
                 Assert.AreEqual(person1.Photo,savedEntiy.Photo);
                 Assert.AreEqual(person1.Surname,savedEntiy.Surname);
+                Assert.AreEqual(person1.Mimetype,savedEntiy.Mimetype);
+            }
+        }
+        [Test]
+        public void Save_GivenExisitingPersonEntity_ShouldSave()
+        {
+            //---------------Set up test pack-------------------
+            var person1 = CreatePersonWithId(1);
+            using (var context = GetContext())
+            {
+                context.People.Add(person1);
+                context.SaveChanges();
+                var existingperson = context.People.FirstOrDefault(x => x.PersonId == person1.PersonId);
+                Assert.IsNotNull(existingperson);
+            }
+            using (var context = GetContext())
+            { 
+                var sut = Create(context);
+                //---------------Assert Precondition---------------
+                //---------------Execute Test ----------------------
+                var expectedId=sut.Save(person1);
+                //---------------Test Result -----------------------
+                var existingEntiy = context.People.FirstOrDefault(x=>x.PersonId==expectedId);
+                Assert.IsNotNull(existingEntiy);
+                existingEntiy.Email = existingEntiy.Email+"1";
+                existingEntiy.FirstName = existingEntiy.FirstName + "1";
+                existingEntiy.Mimetype = existingEntiy.Mimetype + "1";
+                existingEntiy.PhoneNumber = existingEntiy.PhoneNumber.Substring(1);
+                existingEntiy.Photo=new byte[] {1};
+                var newExpectedId = sut.Save(existingEntiy);
+                Assert.AreEqual(expectedId,newExpectedId);
+                var entity = context.People.FirstOrDefault(x => x.PersonId ==newExpectedId);
+                Assert.IsNotNull(entity);
+                Assert.AreEqual(existingEntiy,entity);
             }
         }
 
@@ -127,6 +162,7 @@ namespace LendingLibrary.Repositories.Tests
                 Assert.AreEqual(person.PhoneNumber,result.FirstOrDefault().PhoneNumber);
                 Assert.AreEqual(person.Surname,result.FirstOrDefault().Surname);
                 Assert.AreEqual(person.Photo,result.FirstOrDefault().Photo);
+                Assert.AreEqual(person.Mimetype,result.FirstOrDefault().Mimetype);
             }
         }
 

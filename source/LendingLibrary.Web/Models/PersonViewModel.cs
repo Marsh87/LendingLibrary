@@ -26,6 +26,7 @@ namespace LendingLibrary.Web.Models
         [MaxLength(FieldSizes.EMAIL)]
         public string Email { get; set; } 
         public byte[] Photo { get; set; }
+        public string MimeType { get; set; }
         [Display(Name = "Photo")]
         public HttpPostedFileBase PhotoAttachment { get; set; }
     }

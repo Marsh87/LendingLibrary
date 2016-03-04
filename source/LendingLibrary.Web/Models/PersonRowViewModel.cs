@@ -19,5 +19,6 @@ namespace LendingLibrary.Web.Models
         public string Email { get; set; }
         [Display(Name = "Photo")]
         public byte[] Photo { get; set; }
+        public string Mimetype { get; set; }
     }
 }

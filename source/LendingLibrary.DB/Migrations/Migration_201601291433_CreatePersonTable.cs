@@ -16,7 +16,7 @@ namespace LendingLibrary.DB.Migrations
                 .WithColumn(_Columns.FirstName).AsString(FieldSizes.NAME).NotNullable()
                 .WithColumn(_Columns.Surname).AsString(FieldSizes.NAME).NotNullable()
                 .WithColumn(_Columns.Email).AsString(FieldSizes.EMAIL).Nullable()
-                .WithColumn(_Columns.PHONE_NUMBER).AsString(FieldSizes.PHONE).NotNullable()
+                .WithColumn(_Columns.PhoneNumber).AsString(FieldSizes.PHONE).NotNullable()
                 .WithColumn(_Columns.Photo).AsBinary(Int32.MaxValue).Nullable();
 
         }

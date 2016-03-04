@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="MigrationsRunner.cs" />
     <Compile Include="Migrations\Migration_201601291433_CreatePersonTable.cs" />
+    <Compile Include="Migrations\Migration_201602261538_AlterTablePerson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -19,7 +19,13 @@ namespace LendingLibrary.Repositories
 
         public int Save(Person person)
         {
-            _lendingLibraryContext.People.Add(person);
+            var entity = _lendingLibraryContext.People
+                .FirstOrDefault(x => x.PersonId == person.PersonId);
+            if (entity == null)
+
+            {
+                _lendingLibraryContext.People.Add(person);
+            }
             _lendingLibraryContext.SaveChanges();
             return person.PersonId;
         }

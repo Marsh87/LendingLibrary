@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Web.Mvc;
 using AutoMapper;
 using LendingLibrary.Domain.Models;
@@ -44,6 +45,7 @@ namespace LendingLibrary.Web.Controllers
                 var content=new byte[personViewModel.PhotoAttachment.ContentLength];
                 file.InputStream.Read(content, 0, personViewModel.PhotoAttachment.ContentLength);
                 personViewModel.Photo = content;
+                personViewModel.MimeType =personViewModel.PhotoAttachment.ContentType;
             }
             if (ModelState.IsValid)
             {
@@ -52,6 +54,11 @@ namespace LendingLibrary.Web.Controllers
                 return RedirectToAction("Index");
             }
             return View(personViewModel);
+        }
+        public ActionResult GetImage(byte[] data)
+        {
+            MemoryStream ms = new MemoryStream(data);
+            return File(ms.ToArray(), "image/jpg");
         }
     }
 }

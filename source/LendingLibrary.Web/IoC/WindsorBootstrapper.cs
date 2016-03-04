@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Castle.Components.DictionaryAdapter;
-using Castle.MicroKernel.ModelBuilder.Descriptors;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using LendingLibrary.Domain;
 using LendingLibrary.Repositories;
 using LendingLibrary.Web.Config;
-using LendingLibrary.Web.IoC;
 using PeanutButter.Utils;
 
 namespace LendingLibrary.Web.IoC

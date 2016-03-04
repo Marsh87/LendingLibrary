@@ -11,9 +11,10 @@
                 public const string PersonId = "PersonId";
                 public const string FirstName = "FirstName";
                 public const string Surname = "Surname";
-                public const string PHONE_NUMBER = "PhoneNumber";
+                public const string PhoneNumber = "PhoneNumber";
                 public const string Email = "Email";
-                public const string Photo = "Photo";                
+                public const string Photo = "Photo";
+                public const string Mimetype = "Mimetype";                                
             }
         }
     }
