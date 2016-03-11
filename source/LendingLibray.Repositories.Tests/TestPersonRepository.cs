@@ -121,6 +121,54 @@ namespace LendingLibrary.Repositories.Tests
         }
 
         [Test]
+        public void GetPerson_GivenInValidId_ShouldNotReturnPerson()
+        {
+            //---------------Set up test pack-------------------
+            var person=CreatePersonWithId(1);
+            using (var context = GetContext())
+            {
+                context.People.Clear();
+                context.People.Add(person);
+                context.SaveChanges();
+                var personRepository = Create(context);
+                //---------------Assert Precondition----------------
+
+                //---------------Execute Test ----------------------
+                var invalidId = person.PersonId+1;
+                var result = personRepository.GetPerson(invalidId);
+                //---------------Test Result -----------------------
+                Assert.IsNull(result);
+            }
+        }
+
+        [Test]
+        public void GetPerson_GivenValidId_ShouldReturnThatPerson()
+        {
+            //---------------Set up test pack-------------------
+            var person=CreatePersonWithId(1);
+            using (var context = GetContext())
+            {
+                context.People.Clear();
+                context.People.Add(person);
+                context.SaveChanges();
+                var personRepository = Create(context);
+                //---------------Assert Precondition----------------
+
+                //---------------Execute Test ----------------------
+                var result = personRepository.GetPerson(person.PersonId);
+                //---------------Test Result -----------------------
+                Assert.IsNotNull(result);
+                Assert.AreEqual(person.PersonId,result.PersonId);
+                Assert.AreEqual(person.Email,result.Email);
+                Assert.AreEqual(person.FirstName,result.FirstName);
+                Assert.AreEqual(person.Mimetype,result.Mimetype);
+                Assert.AreEqual(person.PhoneNumber,result.PhoneNumber);
+                Assert.AreEqual(person.Photo,result.Photo);
+                Assert.AreEqual(person.Surname,result.Surname);
+            }
+        }
+
+        [Test]
         public void GetAllPersons_GivenZeroPerson_ShouldReturnEmtptyList()
         {
             //---------------Set up test pack-------------------

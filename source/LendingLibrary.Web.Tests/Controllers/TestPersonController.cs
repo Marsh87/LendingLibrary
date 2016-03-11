@@ -195,8 +195,8 @@ namespace LendingLibrary.Web.Tests.Controllers
         public void Create_Post_GivenValidPersonViewModel_ShouldRedirectToIndex()
         {
             //---------------Set up test pack-------------------
-            var personViewModel= RandomValueGen.GetRandomValue<PersonViewModel>();
-            var person = RandomValueGen.GetRandomValue<Person>();
+            var personViewModel = CreatePersonViewModel();
+            var person = CreatePerson();
             var personRepository = Substitute.For<IPersonRepository>();
             var mapper = Substitute.For<IMapper>();
             mapper.Map<PersonViewModel, Person>(personViewModel).Returns(person);
@@ -211,11 +211,83 @@ namespace LendingLibrary.Web.Tests.Controllers
             Assert.IsNull(result.RouteValues["controller"]);
 
         }
+
+        private static PersonViewModel CreatePersonViewModel()
+        {
+            var personViewModel = RandomValueGen.GetRandomValue<PersonViewModel>();
+            return personViewModel;
+        }
+
+        [Test]
+        public void Edit_Get_GivenPerson_ShouldReturnPersonViewModel()
+        {
+            //---------------Set up test pack-------------------
+            var person = CreatePerson();
+            var personRepository = Substitute.For<IPersonRepository>();
+            personRepository.GetPerson(person.PersonId).Returns(person);
+            var mapper = ResolveMapper();
+            var sut = Create(personRepository, mapper);
+            //---------------Assert Precondition----------------
+
+            //---------------Execute Test ----------------------
+            var result = sut.Edit(person.PersonId) as ViewResult;
+            //---------------Test Result -----------------------
+            Assert.IsNotNull(result);
+            var model = result.Model as PersonViewModel;
+            Assert.AreEqual(person.PersonId,model.PersonId);
+            Assert.AreEqual(person.Email,model.Email);
+            Assert.AreEqual(person.FirstName,model.FirstName);
+            Assert.AreEqual(person.Mimetype,model.MimeType);
+            Assert.AreEqual(person.PhoneNumber,model.PhoneNumber);
+            Assert.AreEqual(person.Photo,model.Photo);
+            Assert.AreEqual(person.Surname,model.Surname);
+        }
+
+        [Test]
+        public void Edit_Post_GivenValidPersonVieModel_ShouldCallSave()
+        {
+            //---------------Set up test pack-------------------
+            var personViewModel = CreatePersonViewModel();
+            var person = CreatePerson();
+            var personRepository = Substitute.For<IPersonRepository>();
+            var mapper = Substitute.For<IMapper>();
+            mapper.Map<Person>(personViewModel).Returns(person);
+
+            var sut = Create(personRepository, mapper);
+            //---------------Assert Precondition----------------
+
+            //---------------Execute Test ----------------------
+            var result = sut.Edit(personViewModel) as RedirectToRouteResult;
+            //---------------Test Result -----------------------
+            Assert.IsNotNull(result);
+            personRepository.Received().Save(person);
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.IsNull(result.RouteValues["controller"]);
+        }
+
+        [Test]
+        public void Edit_Post_GivenInValidPersonVieModel_ShouldReturnViewModel()
+        {
+            //---------------Set up test pack-------------------
+            var personViewModel = CreatePersonViewModel();
+          
+            var sut = Create();
+            FakeInvalidModelState(sut);
+            //---------------Assert Precondition----------------
+
+            //---------------Execute Test ----------------------
+            var result = sut.Edit(personViewModel) as ViewResult;
+            //---------------Test Result -----------------------
+            Assert.IsNotNull(result);
+            var model = result.Model as PersonViewModel;
+            Assert.AreEqual(personViewModel,model);
+        }
+
+
         private static void FakeInvalidModelState(PersonController controller)
         {
             controller.ModelState.AddModelError("", "Test Error");
         }
-
 
         private PersonController Create(IPersonRepository personRepository=null,
                                         IMapper mapper = null)
@@ -224,6 +296,12 @@ namespace LendingLibrary.Web.Tests.Controllers
                 personRepository??Substitute.For<IPersonRepository>(),
                 mapper ??ResolveMapper()
                 );
+        }
+
+        private static Person CreatePerson()
+        {
+            var person = RandomValueGen.GetRandomValue<Person>();
+            return person;
         }
 
         public static IMapper ResolveMapper()

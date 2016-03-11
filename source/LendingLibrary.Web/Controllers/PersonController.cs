@@ -55,10 +55,31 @@ namespace LendingLibrary.Web.Controllers
             }
             return View(personViewModel);
         }
+
         public ActionResult GetImage(byte[] data)
         {
             MemoryStream ms = new MemoryStream(data);
             return File(ms.ToArray(), "image/jpg");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var person = _personRepository.GetPerson(id);
+            var model = _mapper.Map<PersonViewModel>(person);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(PersonViewModel personViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var person = _mapper.Map<Person>(personViewModel);
+                _personRepository.Save(person);
+                return RedirectToAction("Index");
+            }
+            return View(personViewModel);
         }
     }
 }

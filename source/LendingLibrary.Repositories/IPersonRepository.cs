@@ -7,5 +7,6 @@ namespace LendingLibrary.Repositories
     {
         int Save(Person person);
         IEnumerable<Person> GetAllPersons();
+        Person GetPerson(int personId);
     }
 }

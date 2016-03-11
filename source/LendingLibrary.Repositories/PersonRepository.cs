@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using LendingLibrary.Domain;
@@ -33,6 +32,12 @@ namespace LendingLibrary.Repositories
         public IEnumerable<Person> GetAllPersons()
         {
             return _lendingLibraryContext.People.ToList();
+        }
+
+        public Person GetPerson(int personId)
+        {
+            return _lendingLibraryContext.People
+                .FirstOrDefault(x => x.PersonId==personId);
         }
     }
 }
