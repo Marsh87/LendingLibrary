@@ -21,12 +21,26 @@ namespace LendingLibrary.Repositories
             var entity = _lendingLibraryContext.People
                 .FirstOrDefault(x => x.PersonId == person.PersonId);
             if (entity == null)
-
             {
                 _lendingLibraryContext.People.Add(person);
             }
+            else
+            {
+                MapEntityTo(person, entity);
+            }
             _lendingLibraryContext.SaveChanges();
             return person.PersonId;
+        }
+
+        private static void MapEntityTo(Person person, Person entity)
+        {
+            entity.PersonId = person.PersonId;
+            entity.Email = person.Email;
+            entity.FirstName = person.FirstName;
+            entity.Mimetype = person.Mimetype;
+            entity.PhoneNumber = person.PhoneNumber;
+            entity.Photo = person.Photo;
+            entity.Surname = person.Surname;
         }
 
         public IEnumerable<Person> GetAllPersons()

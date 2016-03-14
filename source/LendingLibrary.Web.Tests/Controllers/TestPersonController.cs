@@ -8,7 +8,6 @@ using System.Web.Routing;
 using AutoMapper;
 using LendingLibrary.Domain.Models;
 using LendingLibrary.Repositories;
-using LendingLibrary.Web.AutoMappingProfiles;
 using LendingLibrary.Web.Controllers;
 using LendingLibrary.Web.IoC;
 using LendingLibrary.Web.Models;
@@ -281,6 +280,72 @@ namespace LendingLibrary.Web.Tests.Controllers
             Assert.IsNotNull(result);
             var model = result.Model as PersonViewModel;
             Assert.AreEqual(personViewModel,model);
+        }
+
+        [Test]
+        public void Edit_Post_GivenValidPersonViewNodel_ShouldSetPhoto()
+        {
+
+            var personViewModel = RandomValueGen.GetRandomValue<PersonViewModel>();
+            var httpContextSub = Substitute.For<HttpContextBase>();
+            var serverSub = Substitute.For<HttpServerUtilityBase>();
+            serverSub.MapPath("~/app_data").Returns(@"c:\work\app_data");
+            httpContextSub.Server.Returns(serverSub);
+            var sut = Create();
+            FakeInvalidModelState(sut);
+            //---------------Set up test pack-------------------
+
+            //---------------Assert Precondition----------------
+            sut.ControllerContext = new ControllerContext(httpContextSub, new RouteData(), sut);
+            //---------------Execute Test ----------------------
+            var fileMock = Substitute.For<HttpPostedFileBase>();
+            var stream = Substitute.For<Stream>();
+            stream.Write(Arg.Any<byte[]>(), Arg.Any<int>(), Arg.Any<int>());
+
+            fileMock.InputStream.Returns(stream);
+            fileMock.ContentLength.Returns(1);
+            fileMock.FileName.Returns("file1.jpg");
+            personViewModel.PhotoAttachment = fileMock;
+            var result = sut.Edit(personViewModel) as ViewResult;
+            //---------------Test Result -----------------------
+            var model = result.Model as PersonViewModel;
+            var content = new byte[model.PhotoAttachment.ContentLength];
+            Assert.IsNotNull(model.Photo);
+            Assert.AreEqual(fileMock.InputStream, model.PhotoAttachment.InputStream);
+            Assert.AreEqual(content, model.Photo);
+        }
+
+        [Test]
+        public void Edit_Post_GivenValidPersonViewNodel_ShouldSetMimeType()
+        {
+
+            var personViewModel = RandomValueGen.GetRandomValue<PersonViewModel>();
+            var httpContextSub = Substitute.For<HttpContextBase>();
+            var serverSub = Substitute.For<HttpServerUtilityBase>();
+            serverSub.MapPath("~/app_data").Returns(@"c:\work\app_data");
+            httpContextSub.Server.Returns(serverSub);
+            var sut = Create();
+            FakeInvalidModelState(sut);
+            //---------------Set up test pack-------------------
+
+            //---------------Assert Precondition----------------
+            sut.ControllerContext = new ControllerContext(httpContextSub, new RouteData(), sut);
+            //---------------Execute Test ----------------------
+            var fileMock = Substitute.For<HttpPostedFileBase>();
+            var stream = Substitute.For<Stream>();
+            stream.Write(Arg.Any<byte[]>(), Arg.Any<int>(), Arg.Any<int>());
+
+            fileMock.InputStream.Returns(stream);
+            fileMock.ContentLength.Returns(1);
+            fileMock.FileName.Returns("file1.jpg");
+            personViewModel.PhotoAttachment = fileMock;
+            var result = sut.Edit(personViewModel) as ViewResult;
+            //---------------Test Result -----------------------
+            var model = result.Model as PersonViewModel;
+            var content = new byte[model.PhotoAttachment.ContentLength];
+            Assert.IsNotNull(model.Photo);
+            Assert.AreEqual(fileMock.InputStream, model.PhotoAttachment.InputStream);
+            Assert.AreEqual(model.MimeType, fileMock.ContentType);
         }
 
 

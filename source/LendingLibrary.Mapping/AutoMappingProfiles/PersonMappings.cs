@@ -4,7 +4,7 @@ using LendingLibrary.Web.Models;
 
 namespace LendingLibrary.Mapping.AutoMappingProfiles
 {
-    public class DELETE_ME_PersonMappings:Profile
+    public class PersonMappings:Profile
     {
         protected override void Configure()
         {

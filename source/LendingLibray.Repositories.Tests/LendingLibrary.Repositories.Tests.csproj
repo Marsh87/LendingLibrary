@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PersonBuilder.cs" />
+    <Compile Include="TestItemRepository.cs" />
     <Compile Include="TestPersonRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

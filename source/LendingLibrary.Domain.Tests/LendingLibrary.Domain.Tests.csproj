@@ -98,8 +98,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\ItemBuilder.cs" />
     <Compile Include="Builders\PersonBuilder.cs" />
     <Compile Include="LendingLibraryContextPerisitenceTestFixtureBase.cs" />
+    <Compile Include="Models\TestItem.cs" />
+    <Compile Include="Models\TestItemPersistence.cs" />
     <Compile Include="Models\TestPerson.cs" />
     <Compile Include="Models\TestPersonPersistence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -73,6 +73,15 @@ namespace LendingLibrary.Web.Controllers
         [HttpPost]
         public ActionResult Edit(PersonViewModel personViewModel)
         {
+            if (personViewModel.PhotoAttachment != null)
+            {
+                var file = personViewModel.PhotoAttachment;
+                var content = new byte[personViewModel.PhotoAttachment.ContentLength];
+                file.InputStream.Read(content, 0, personViewModel.PhotoAttachment.ContentLength);
+                personViewModel.Photo = content;
+                personViewModel.MimeType = personViewModel.PhotoAttachment.ContentType;
+            }
+
             if (ModelState.IsValid)
             {
                 var person = _mapper.Map<Person>(personViewModel);

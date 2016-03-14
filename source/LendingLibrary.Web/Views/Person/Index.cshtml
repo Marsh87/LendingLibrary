@@ -8,7 +8,7 @@
 <h2>Persons</h2>
 
 <p>
-    @Html.ActionLink("Create New Person", "Create")
+    @Html.ActionLink("Register New Person", "Create")
 </p>
 <table class="table">
     <tr>
@@ -24,6 +24,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -45,6 +46,7 @@
         {
             <td><img style="width: 100px; height: 100px" src="data:image;base64,@System.Convert.ToBase64String(item.Photo)"/></td>
         }
+        <td>@Html.ActionLink("Edit","Edit",new {id=item.PersonId})</td>
     </tr>
 }
 

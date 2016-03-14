@@ -1,12 +1,14 @@
 ﻿using System.Data.Common;
 using System.Data.Entity;
 using LendingLibrary.Domain.Models;
+using PeanutButter.Utils.Entity;
 
 namespace LendingLibrary.Domain
 {
     public class LendingLibraryContext : DbContext, ILendingLibraryContext
     {
         public IDbSet<Person> People { get; set; }
+        public IDbSet<Item> Items { get; set; }
 
         private DbConnection _dbConnection;
 
