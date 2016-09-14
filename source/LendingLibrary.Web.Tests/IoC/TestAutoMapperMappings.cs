@@ -73,7 +73,7 @@ namespace LendingLibrary.Web.Tests.IoC
             //---------------Test Result -----------------------
             PropertyAssert.AreEqual(input,result,propertyName);
         }
-
+        [Ignore("Wip")]
         [Test]
         public void Item_To_ItemRowViewModel()
         {

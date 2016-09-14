@@ -46,6 +46,7 @@ namespace LendingLibrary.Web.Tests.Controllers
             //---------------Test Result -----------------------
         }
 
+        [Ignore("Wip")]
         [Test]
         public void Index_ShouldReturnPersonRowViewModel()
         {
