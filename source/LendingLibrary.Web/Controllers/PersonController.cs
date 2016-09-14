@@ -36,7 +36,7 @@ namespace LendingLibrary.Web.Controllers
             return View();
         }
 
-        [HttpPost]
+       // [HttpPost]
         public ActionResult Create(PersonViewModel personViewModel)
         {
             if (personViewModel.PhotoAttachment != null)

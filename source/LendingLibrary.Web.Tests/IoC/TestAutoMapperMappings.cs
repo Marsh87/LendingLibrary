@@ -73,5 +73,19 @@ namespace LendingLibrary.Web.Tests.IoC
             //---------------Test Result -----------------------
             PropertyAssert.AreEqual(input,result,propertyName);
         }
+
+        [Test]
+        public void Item_To_ItemRowViewModel()
+        {
+            //---------------Set up test pack-------------------
+            
+            //---------------Assert Precondition----------------
+
+            //---------------Execute Test ----------------------
+
+            //---------------Test Result -----------------------
+            Assert.Fail("Test Not Yet Implemented");
+        }
+
     }
 }
