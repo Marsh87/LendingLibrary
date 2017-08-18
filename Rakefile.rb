@@ -41,7 +41,7 @@ desc "Builds including tests"
 task :build => [:just_build, :test]
 
 desc "Builds without tests"
-task :just_build => [:update_node_packages, :update_packages, :clean, :msbuild, :copy_to_bin]
+task :just_build => [:update_packages, :clean, :msbuild, :copy_to_bin]
 
 desc "Builds with coverage and js checks"
 #task :build_with_cover => [:just_build, :test_with_nunit_coverage, :test_with_jasmine_coverage, :check_js] 
