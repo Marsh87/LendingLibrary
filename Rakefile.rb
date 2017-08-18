@@ -23,9 +23,9 @@ end
 #------------------------dependency settings---------------------
 
 #------------------------project settings------------------------
-$solution = "LendingLibrary.sln"
+$solution = "source/LendingLibrary.sln"
 #---- c# testing ------------------------------------------------
-$binaries_baselocation = "LendingLibrary/bin"
+$binaries_baselocation = "source/LendingLibrary/bin"
 $nuget_location = "../rake-tasks"
 $binaries_location = "#{$binaries_baselocation}/all"
 $nunittesting_location = "#{$binaries_baselocation}/nunittesting"
